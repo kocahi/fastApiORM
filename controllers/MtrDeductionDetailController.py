@@ -17,12 +17,12 @@ def get_master_deduction_details(db:Session=Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
     return CommonResponse.payloads(ResponseException(200),master_deduction_details)
 
-# @router.get("/get-master-deduction-detail/{deduction_detail_id}", status_code=status.HTTP_200_OK, response_model=MtrDeductionDetailSchema.GetMasterDeductionDetailsResponse)
-# def get_master_deduction_details(deduction_detail_id, db:Session):
-#     master_deduction_detail = MtrDeductionDetailCRUD.get_mtr_deduction_detail_cruds(db, deduction_detail_id)
-#     if not master_deduction_detail:
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
-#     return CommonResponse.payloads(ResponseException(200),master_deduction_detail)
+@router.get("/get-master-deduction-detail/{deduction_detail_id}", status_code=status.HTTP_200_OK)
+def get_master_deduction_details(deduction_detail_id = None, db:Session=Depends(get_db)):
+    master_deduction_detail = MtrDeductionDetailCRUD.get_mtr_deduction_detail_cruds(db, deduction_detail_id)
+    if not master_deduction_detail:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
+    return CommonResponse.payloads(ResponseException(200),master_deduction_detail)
 
 #bisa
 @router.post("/create-master-deduction-detail", status_code=201)
