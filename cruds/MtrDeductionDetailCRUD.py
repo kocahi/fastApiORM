@@ -32,8 +32,6 @@ def del_mtr_deduction_detail(db:Session,del_id:int):
 
 def update_mtr_deduction_detail(db:Session,update_id:int,deduction_detail:MtrDeductionDetailSchema.MtrDeductionDetailSchema):
     _deduction_detail = get_mtr_deduction_detail_cruds(db,update_id)
-    _deduction_detail = MtrDeductionDetailModel.MtrDeductionDetailModel()
-    _deduction_detail.deduction_detail_id = deduction_detail.deduction_detail_id
     _deduction_detail.deduction_code = deduction_detail.deduction_code
     _deduction_detail.deduction_level = deduction_detail.deduction_level
     _deduction_detail.deduction_percent = deduction_detail.deduction_percent
