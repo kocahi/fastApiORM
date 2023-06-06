@@ -6,18 +6,7 @@ from utils.AddModelsEngine import addmodels
 
 app = FastAPI()
 
-# utilized for incoming request from Front End / API Gateway
-origins = [
-    "http://localhost:3000",
-]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 addmodels()
 

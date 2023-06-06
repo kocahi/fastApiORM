@@ -17,6 +17,7 @@ def get_master_deduction_details(db:Session=Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
     return CommonResponse.payloads(ResponseException(200),master_deduction_details)
 
+#bisa
 @router.get("/get-master-deduction-detail/{deduction_detail_id}", status_code=status.HTTP_200_OK)
 def get_master_deduction_details(deduction_detail_id = None, db:Session=Depends(get_db)):
     master_deduction_detail = MtrDeductionDetailCRUD.get_mtr_deduction_detail_cruds(db, deduction_detail_id)
@@ -39,15 +40,16 @@ def post_master_deduction_detail(payload:MtrDeductionDetailSchema.MtrDeductionDe
 
 
 
-# @router.put("/update-master-deduction-detail/{deduction_detail_id}",status_code=202)
-# def update_data(payload:MtrDeductionDetailSchema.MtrDeductionDetailSchema, deduction_detail_id,db:Session=Depends(get_db)):
-#     update_master_deduction_detail, update_data_new = MtrDeductionDetailCRUD.update_mtr_deduction_detail(db,payload,deduction_detail_id)
-#     if not update_master_deduction_detail:
-#         db.commit()
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
-#     db.commit()
-#     db.refresh(update_data_new)
-#     return CommonResponse.payload(ResponseException(200), update_data_new)
+@router.put("/update-master-deduction-detail/{deduction_detail_id}",status_code=202)
+def update_data(deduction_detail_id: int, request:MtrDeductionDetailSchema.MtrUpdateDeductionDetailSchema, db:Session=Depends(get_db)):
+    # update_master_deduction_detail, update_data_new = MtrDeductionDetailCRUD.update_mtr_deduction_detail(db,payload,deduction_detail_id)
+    # if not update_data_new:
+    #     db.rollback()
+    #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
+    # db.commit()
+    # db.refresh(update_data_new)
+    # return CommonResponse.payload(ResponseException(200), update_data_new)
+    return MtrDeductionDetailCRUD.update_mtr_deduction_detail(db, deduction_detail_id, request)
 
 #bisa
 @router.delete("/delete-master-deduction-detail/{deduction_detail_id}", status_code=202)
