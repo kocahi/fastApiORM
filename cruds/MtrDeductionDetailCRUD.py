@@ -19,7 +19,6 @@ def post_mtr_deduction_detail(db:Session,deduction_detail:MtrDeductionDetailSche
     db.add(_deduction_detail)
     db.commit()
     db.refresh(_deduction_detail)
-    print(_deduction_detail)
     return _deduction_detail
 
 def del_mtr_deduction_detail(db:Session,del_id:int):

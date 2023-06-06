@@ -13,9 +13,6 @@ class MtrDeductionDetailSchema(BaseModel):
     class Config:
         orm_mode = True
 
-class GetMasterDeductionDetailsResponse(BaseModel):
-    detail: str
-    data: Optional[MtrDeductionDetailSchema]
 
 
 class MtrUpdateDeductionDetailSchema(BaseModel):
