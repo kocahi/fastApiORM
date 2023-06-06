@@ -42,6 +42,12 @@ def update_mtr_deduction_detail(db:Session,update_id:int,request:MtrDeductionDet
         MtrDeductionDetailModel.deduction_percent: request.deduction_percent,
         MtrDeductionDetailModel.limit_days: request.limit_days
     })
+def update_mtr_deduction_detail(db:Session,update_id:int,deduction_detail:MtrDeductionDetailSchema.MtrDeductionDetailSchema):
+    _deduction_detail = get_mtr_deduction_detail_cruds(db,update_id)
+    _deduction_detail.deduction_code = deduction_detail.deduction_code
+    _deduction_detail.deduction_level = deduction_detail.deduction_level
+    _deduction_detail.deduction_percent = deduction_detail.deduction_percent
+    _deduction_detail.limit_days = deduction_detail.deduction_level
     db.commit()
     return "ok"
 
