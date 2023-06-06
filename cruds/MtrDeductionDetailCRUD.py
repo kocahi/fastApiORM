@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models.MtrDeductionDetailModel import MtrDeductionDetailModel
+from models.MtrDeductionDetailModelGembel import MtrDeductionDetailModel
 from schemas import MtrDeductionDetailSchema
 from fastapi import HTTPException, status
 

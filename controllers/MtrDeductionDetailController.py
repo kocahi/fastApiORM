@@ -40,21 +40,22 @@ def post_master_deduction_detail(payload:MtrDeductionDetailSchema.MtrDeductionDe
 
 
 
-@router.put("/update-master-deduction-detail/{deduction_detail_id}",status_code=202)
-def update_data(deduction_detail_id: int, request:MtrDeductionDetailSchema.MtrUpdateDeductionDetailSchema, db:Session=Depends(get_db)):
-    # update_master_deduction_detail, update_data_new = MtrDeductionDetailCRUD.update_mtr_deduction_detail(db,payload,deduction_detail_id)
-    # if not update_data_new:
-    #     db.rollback()
-    #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
-    # db.commit()
-    # db.refresh(update_data_new)
-    # return CommonResponse.payload(ResponseException(200), update_data_new)
-    return MtrDeductionDetailCRUD.update_mtr_deduction_detail(db, deduction_detail_id, request)
-def update_data(payload:MtrDeductionDetailSchema.MtrUpdateDeductionDetailSchema, deduction_detail_id,db:Session=Depends(get_db)):
-    update_data_new = MtrDeductionDetailCRUD.update_mtr_deduction_detail(db,deduction_detail_id,payload)
-    db.commit()
-    db.refresh(update_data_new)
-    return CommonResponse.payload(ResponseException(200), update_data_new)
+# # @router.put("/update-master-deduction-detail/{deduction_detail_id}",status_code=202)
+# # def update_data(deduction_detail_id: int, request:MtrDeductionDetailSchema.MtrUpdateDeductionDetailSchema, db:Session=Depends(get_db)):
+# #     update_master_deduction_detail, update_data_new = MtrDeductionDetailCRUD.update_mtr_deduction_detail(db,payload,deduction_detail_id)
+# #     if not update_data_new:
+# #         db.rollback()
+# #         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
+# #     db.commit()
+# #     db.refresh(update_data_new)
+# #     return CommonResponse.payload(ResponseException(200), update_data_new)
+# #     return MtrDeductionDetailCRUD.update_mtr_deduction_detail(db, deduction_detail_id, request)
+
+# def update_data(payload:MtrDeductionDetailSchema.MtrUpdateDeductionDetailSchema, deduction_detail_id,db:Session=Depends(get_db)):
+#     update_data_new = MtrDeductionDetailCRUD.update_mtr_deduction_detail(db,deduction_detail_id,payload)
+#     db.commit()
+#     db.refresh(update_data_new)
+#     return CommonResponse.payload(ResponseException(200), update_data_new)
 
 #bisa
 @router.delete("/delete-master-deduction-detail/{deduction_detail_id}", status_code=202)
