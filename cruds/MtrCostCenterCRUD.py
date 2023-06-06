@@ -21,6 +21,13 @@ def post_mtr_cost_center(db: Session, cost_center: MtrCostCenterSchema.MtrCostCe
 
     return _cost_center
 
-
+def del_mtr_cost_center(db:Session,del_id:int):
+    _cost_center = get_mtr_cost_center_cruds(db=db,get_id=del_id)
+    db.delete(_cost_center)
+    db.commit()
+    return {
+        "status_code":200,
+        "msg_status":"deleted"
+    }
 
 

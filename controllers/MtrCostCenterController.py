@@ -25,7 +25,7 @@ def get_master_cost_center(cost_center_id = None, db:Session=Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
     return CommonResponse.payloads(ResponseException(200),master_cost_center)
 
-#error
+#bisa
 @router.post("/create-master-cost-center", status_code=201)
 def post_master_cost_center(payload:MtrCostCenterSchema.MtrCostCenterSchema,db:Session=Depends(get_db)):
     try:
@@ -37,3 +37,14 @@ def post_master_cost_center(payload:MtrCostCenterSchema.MtrCostCenterSchema,db:S
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=ResponseException(409))
     db.refresh(new_master_cost_center)
     return CommonResponse.payload(ResponseException(201), new_master_cost_center)
+
+
+#belum test
+@router.delete("/delete-master-cost-center/{cost_center_id}", status_code=202)
+def delete_master_cost_center(cost_center_id, db:Session=Depends(get_db)):
+    erase_master_cost_center = MtrCostCenterCRUD.del_mtr_cost_center(db,cost_center_id)
+    if not erase_master_cost_center:
+        db.rollback
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=ResponseException(404))
+    db.commit()
+    return CommonResponse.payload(ResponseException(202), erase_master_cost_center)
