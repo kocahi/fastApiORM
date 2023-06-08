@@ -39,6 +39,7 @@ def post_master_cost_center(payload:MtrCostCenterSchema.MtrCostCenterSchema,db:S
     return CommonResponse.payload(ResponseException(201), new_master_cost_center)
 
 
+
 #belum test
 @router.delete("/delete-master-cost-center/{cost_center_id}", status_code=202)
 def delete_master_cost_center(cost_center_id, db:Session=Depends(get_db)):

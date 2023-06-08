@@ -30,14 +30,29 @@ def del_mtr_deduction_detail(db:Session,del_id:int):
         "msg_status":"deleted"
     }
 
-def update_mtr_deduction_detail(db:Session,update_id:int,request:MtrDeductionDetailSchema.MtrUpdateDeductionDetailSchema):
-    deduction_detail = db.query(MtrDeductionDetailModel).filter(MtrDeductionDetailModel.deduction_detail_id == update_id)
-    if not deduction_detail.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Deduction detal with id {update_id} not found")
-    deduction_detail.update({
-        MtrDeductionDetailModel.is_active: request.is_active,
-        MtrDeductionDetailModel.deduction_code: request.deduction_code,
-        MtrDeductionDetailModel.deduction_level: request.deduction_level,
-        MtrDeductionDetailModel.deduction_percent: request.deduction_percent,
-        MtrDeductionDetailModel.limit_days: request.limit_days
-    })
+# def update_mtr_deduction_details(db:Session,update_id:int,request:MtrDeductionDetailSchema.MtrUpdateDeductionDetailSchema):
+#     deduction_detail = db.query(MtrDeductionDetailModel).filter(MtrDeductionDetailModel.deduction_detail_id == update_id).first()
+#     if not deduction_detail:
+#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Deduction detal with id {update_id} not found")
+#     deduction_detail.update({
+#         MtrDeductionDetailModel.is_active: request.is_active,
+#         MtrDeductionDetailModel.deduction_code: request.deduction_code,
+#         MtrDeductionDetailModel.deduction_level: request.deduction_level,
+#         MtrDeductionDetailModel.deduction_percent: request.deduction_percent,
+#         MtrDeductionDetailModel.limit_days: request.limit_days
+#     })
+#     db.commit()
+#     return "ok"
+#     # db.refresh(update_data_new)
+#     # return CommonResponse.payload(ResponseException(200), update_data_new)
+
+def update_mtr_deduction_details(db:Session,update_id:int,request:MtrDeductionDetailSchema.MtrUpdateDeductionDetailSchema):
+    _deduction_detail  = get_mtr_deduction_detail_cruds(db, update_id)
+    _deduction_detail.is_active = request.is_active
+    _deduction_detail.deduction_code = request.deduction_code
+    _deduction_detail.deduction_level = request.deduction_level
+    _deduction_detail.deduction_percent = request.deduction_percent
+    _deduction_detail.limit_days = request.limit_days
+    db.commit()
+    db.refresh(_deduction_detail)
+    return _deduction_detail
