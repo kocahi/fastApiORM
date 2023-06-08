@@ -21,6 +21,18 @@ def post_mtr_cost_center(db: Session, cost_center: MtrCostCenterSchema.MtrCostCe
 
     return _cost_center
 
+
+def update_mtr_cost_center(db:Session,update_id:int,request:MtrCostCenterSchema.MtrUpdateCostCenterSchema):
+    _cost_center  = get_mtr_cost_center_cruds(db, update_id)
+    _cost_center.is_active = request.is_active
+    _cost_center.cost_center_name = request.cost_center_name
+    _cost_center.cost_center_code = request.cost_center_code
+    db.commit()
+    db.refresh(_cost_center)
+    return _cost_center
+
+
+
 def del_mtr_cost_center(db:Session,del_id:int):
     _cost_center = get_mtr_cost_center_cruds(db=db,get_id=del_id)
     db.delete(_cost_center)

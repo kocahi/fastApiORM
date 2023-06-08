@@ -20,7 +20,7 @@ class GetMtrCostCenterSchema(BaseModel):
 class MtrUpdateCostCenterSchema(BaseModel):
     is_active: Optional[bool] = None 
     cost_center_code: str
-    cost_center_name: int
+    cost_center_name: str
 
     class Config:
         orm_mode = True
