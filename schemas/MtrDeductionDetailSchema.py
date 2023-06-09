@@ -14,7 +14,6 @@ class MtrDeductionDetailSchema(BaseModel):
         orm_mode = True
 
 
-
 class MtrUpdateDeductionDetailSchema(BaseModel):
     is_active: Optional[bool] = None 
     deduction_code: str
