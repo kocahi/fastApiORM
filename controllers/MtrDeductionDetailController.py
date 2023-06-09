@@ -61,3 +61,5 @@ def delete_master_deduction_detail(deduction_detail_id, db:Session=Depends(get_d
     db.commit()
     return CommonResponse.payload(ResponseException(202), erase_master_deduction_detail)
 
+
+

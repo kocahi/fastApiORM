@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models.MtrCostCenterModel import MtrCostCenterModel
+from entities.MtrCostCenterEntity import MtrCostCenterModel
 from schemas import MtrCostCenterSchema
 from fastapi import HTTPException, status
 

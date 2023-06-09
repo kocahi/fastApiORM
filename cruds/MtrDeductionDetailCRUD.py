@@ -1,16 +1,16 @@
 from sqlalchemy.orm import Session
-from models.MtrDeductionDetailModel import MtrDeductionDetailModel
+from entities.MtrDeductionDetailEntity import MtrDeductionDetail
 from schemas import MtrDeductionDetailSchema
 from fastapi import HTTPException, status
 
 def get_mtr_deduction_details_cruds(db:Session,offset:int=0, limit:int=100):
-    return db.query(MtrDeductionDetailModel).order_by(MtrDeductionDetailModel.deduction_detail_id).offset(offset).limit(limit).all()
+    return db.query(MtrDeductionDetail).order_by(MtrDeductionDetail.deduction_detail_id).offset(offset).limit(limit).all()
 
 def get_mtr_deduction_detail_cruds(db:Session,get_id:int):
-    return  db.query(MtrDeductionDetailModel).filter(MtrDeductionDetailModel.deduction_detail_id==get_id).first()
+    return  db.query(MtrDeductionDetail).filter(MtrDeductionDetail.deduction_detail_id==get_id).first()
 
 def post_mtr_deduction_detail(db:Session,deduction_detail:MtrDeductionDetailSchema.MtrDeductionDetailSchema):
-    _deduction_detail = MtrDeductionDetailModel()
+    _deduction_detail = MtrDeductionDetail()
     _deduction_detail.deduction_detail_id = deduction_detail.deduction_detail_id
     _deduction_detail.deduction_code = deduction_detail.deduction_code
     _deduction_detail.deduction_level = deduction_detail.deduction_level
