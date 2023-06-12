@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from entities.MtrCostCenterEntity import MtrCostCenter
-from schemas import MtrCostCenterSchema
+from entities.CostCenterEntity import MtrCostCenter
+from schemas import CostCenterSchema
 from fastapi import HTTPException, status
 
 def get_mtr_cost_centers_cruds(db:Session,offset:int=0, limit:int=100):
@@ -9,7 +9,7 @@ def get_mtr_cost_centers_cruds(db:Session,offset:int=0, limit:int=100):
 def get_mtr_cost_center_cruds(db:Session,get_id:int):
     return  db.query(MtrCostCenter).filter(MtrCostCenter.cost_center_id==get_id).first()
 
-def post_mtr_cost_center(db: Session, cost_center: MtrCostCenterSchema.MtrCostCenterSchema):
+def post_mtr_cost_center(db: Session, cost_center: CostCenterSchema.MtrCostCenterSchema):
     _cost_center = MtrCostCenter()
     _cost_center.cost_center_id = cost_center.cost_center_id
     _cost_center.cost_center_code = cost_center.cost_center_code
@@ -22,7 +22,7 @@ def post_mtr_cost_center(db: Session, cost_center: MtrCostCenterSchema.MtrCostCe
     return _cost_center
 
 
-def update_mtr_cost_center(db:Session,update_id:int,request:MtrCostCenterSchema.MtrUpdateCostCenterSchema):
+def update_mtr_cost_center(db:Session,update_id:int,request:CostCenterSchema.MtrUpdateCostCenterSchema):
     _cost_center  = get_mtr_cost_center_cruds(db, update_id)
     _cost_center.is_active = request.is_active
     _cost_center.cost_center_name = request.cost_center_name

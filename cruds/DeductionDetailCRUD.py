@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from entities.MtrDeductionDetailEntity import MtrDeductionDetail
-from schemas import MtrDeductionDetailSchema
+from entities.DeductionDetailEntity import MtrDeductionDetail
+from schemas import DeductionDetailSchema
 from fastapi import HTTPException, status
 
 def get_mtr_deduction_details_cruds(db:Session,offset:int=0, limit:int=100):
@@ -9,7 +9,7 @@ def get_mtr_deduction_details_cruds(db:Session,offset:int=0, limit:int=100):
 def get_mtr_deduction_detail_cruds(db:Session,get_id:int):
     return  db.query(MtrDeductionDetail).filter(MtrDeductionDetail.deduction_detail_id==get_id).first()
 
-def post_mtr_deduction_detail(db:Session,deduction_detail:MtrDeductionDetailSchema.MtrDeductionDetailSchema):
+def post_mtr_deduction_detail(db:Session,deduction_detail:DeductionDetailSchema.MtrDeductionDetailSchema):
     _deduction_detail = MtrDeductionDetail()
     _deduction_detail.deduction_detail_id = deduction_detail.deduction_detail_id
     _deduction_detail.deduction_code = deduction_detail.deduction_code
@@ -30,7 +30,7 @@ def del_mtr_deduction_detail(db:Session,del_id:int):
         "msg_status":"deleted"
     }
 
-def update_mtr_deduction_details(db:Session,update_id:int,request:MtrDeductionDetailSchema.MtrUpdateDeductionDetailSchema):
+def update_mtr_deduction_details(db:Session,update_id:int,request:DeductionDetailSchema.MtrUpdateDeductionDetailSchema):
     _deduction_detail  = get_mtr_deduction_detail_cruds(db, update_id)
     _deduction_detail.is_active = request.is_active
     _deduction_detail.deduction_code = request.deduction_code
