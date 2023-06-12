@@ -5,7 +5,7 @@ from configs.database import Base
 
 class MtrSourceDocument(Base):
     __tablename__ = 'mtr_source_document'
-
+    is_active = Column(Boolean,nullable=False,default=True)
     mtr_source_document_id = Column(Integer, primary_key=True, nullable=False)
     source_document_type_id = Column(Integer, nullable=False)
     brand_id = Column(Integer, nullable=False) #fk
@@ -30,6 +30,18 @@ class MtrSourceDocument(Base):
     source_document_transaction_type_prefix = Column(String(128), nullable=True)
     source_document_bank_acc_prefix = Column(String(128), nullable=True)
     source_document_auto_number = Column(Boolean, nullable=False)
+
+
+    brand = relationship("", back_populates="") #entity terbuat
+    profit = relationship("", back_populates="") #entity terbuat
+    transaction = relationship("", back_populates="") #entity terbuat
+    bank = relationship("", back_populates="") #entity terbuat
+    reset = relationship("", back_populates="") #entity terbuat
+    signature_emp_1 = relationship("", back_populates="")
+    signature_emp_2 = relationship("", back_populates="")
+    signature_emp_3 = relationship("", back_populates="")
+    signature_emp_4 = relationship("", back_populates="")
+    signature_emp_5 = relationship("", back_populates="")
 
 
 
