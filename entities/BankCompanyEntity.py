@@ -5,7 +5,7 @@ from configs.database import Base,engine
 
 class TableName(Base):
     __tablename__ = 'mtr_bank_company'
-    is_active = Column(Boolean,nullable=False,default=True)
+    is_active = Column(Boolean,nullable=False,default=True) 
     bank_company_id = Column(Integer, primary_key=True, nullable=False)
     company_id = Column(Integer, nullable=False)
     bank_company_code = Column(String(10), nullable=False)

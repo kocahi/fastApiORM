@@ -2,7 +2,7 @@ from sqlalchemy import String,Column,Float,Integer, Boolean, Numeric, text
 from sqlalchemy.orm import relationship
 from configs.database import Base,engine
 
-class MtrCostCenter(Base):
+class MtrBrand(Base):
     __tablename__ = "mtr_brand"
     is_active = Column(Boolean,nullable=False,default=True)
     brand_id = Column(Integer, primary_key=True, nullable=False)
