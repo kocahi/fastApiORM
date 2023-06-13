@@ -5,8 +5,6 @@ from configs.config import Settings
 
 check = Settings()
 
-#server = 'nomad2805'
-#database = 'DMSTEST'
 
 database_url = f"mssql+pymssql://{check.db_user}:{check.db_password}@{check.db_server}/{check.db_name}" #MSSQL SERVER
 #database_url = 'mssql+pyodbc://' + server + '/' + database + '?trusted_connection=yes&driver=ODBC+Driver+17+for+SQL+Server'
